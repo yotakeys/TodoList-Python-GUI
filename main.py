@@ -1,8 +1,6 @@
 from tkinter import *
 import tkinter.font as tkfont
 
-from regex import P
-
 root = Tk()
 
 # Configure Window
@@ -47,6 +45,8 @@ InputToDo = Entry(Input,
     width = 50,
     justify= "center",
     borderwidth=10,
+    font =tkfont.Font(
+        family = "roboto")
 )
 
 InputToDo.pack()
@@ -56,15 +56,26 @@ Input.pack(pady=10)
 BtnFrame = Frame(root)
 
 def add_task():
-    pass
+    todo.insert(END, InputToDo.get())
+    InputToDo.delete(0,END)
 def delete_task():
-    pass
+    todo.delete(ANCHOR)
 def done_task():
-    pass
+    todo.itemconfig(
+        todo.curselection(),
+        fg = "#dedede"
+    )
 
 add = Button(BtnFrame,text = "Add",command=add_task)
 delete = Button(BtnFrame,text = "Delete",command=delete_task)
 done = Button(BtnFrame,text = "Done",command=done_task)
+
+add.configure(bg = "#3279a8",relief = "ridge", width = 7, height =1,font =tkfont.Font(
+        family = "Bahnschrift SemiBold Condensed", size =12))
+delete.configure(bg = "#3279a8",relief = "ridge", width = 7, height =1,font =tkfont.Font(
+        family = "Bahnschrift SemiBold Condensed", size =12))
+done.configure(bg = "#3279a8",relief = "ridge", width = 7, height =1,font =tkfont.Font(
+        family = "Bahnschrift SemiBold Condensed", size =12))
 
 add.grid(row = 0, column = 0, padx = 15)
 delete.grid(row = 0, column = 1, padx = 15)
@@ -72,7 +83,6 @@ done.grid(row = 0, column = 2, padx = 15)
 
 BtnFrame.configure(bg = "#ffffff")
 BtnFrame.pack(pady = 10)
-
 
 #to do list
 
