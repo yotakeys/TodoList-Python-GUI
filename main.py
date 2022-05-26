@@ -12,7 +12,7 @@ root.resizable(False,False)
 root.iconbitmap("todolisticon.ico")
 
 root.configure(
-    bg = "#ffffff"
+    bg = "#1b2330"
 )
 
 #Label Judul
@@ -26,7 +26,8 @@ Judul = Label(JudulFrame,
 )
 
 Judul.configure(
-    bg="#ffffff",
+    bg="#1b2330",
+    fg = "#ffffff",
     font =tkfont.Font(
         family = "Bahnschrift SemiBold Condensed",
         size= 30,
@@ -46,24 +47,24 @@ InputToDo = Entry(Input,
     justify= "center",
     borderwidth=10,
     font =tkfont.Font(
-        family = "roboto")
+        family = "courier")
 )
 
 InputToDo.pack()
-Input.pack(pady=10)
+Input.pack(pady=10, padx=20)
 
 #Button
 BtnFrame = Frame(root)
 
 def add_task():
-    todo.insert(END, InputToDo.get())
+    todo.insert(END, "> " + InputToDo.get())
     InputToDo.delete(0,END)
 def delete_task():
     todo.delete(ANCHOR)
 def done_task():
     todo.itemconfig(
         todo.curselection(),
-        fg = "#dedede"
+        fg = "#747e8f"
     )
 
 add = Button(BtnFrame,text = "Add",command=add_task)
@@ -81,27 +82,53 @@ add.grid(row = 0, column = 0, padx = 15)
 delete.grid(row = 0, column = 1, padx = 15)
 done.grid(row = 0, column = 2, padx = 15)
 
-BtnFrame.configure(bg = "#ffffff")
+BtnFrame.configure(bg = "#1b2330")
 BtnFrame.pack(pady = 10)
 
 #to do list
 
 ListFrame = Frame(root)
 
-data = [x for x in range(30)]
+data = [
+    "Makan bareng ayang",
+    "Minum bareng ayang",
+    "Kelas Matematika",
+    "UAS FISIKA",
+    "as mdsa jnjk njsanjksn an sanjnd kanjn snjksa jdnna kajs asj ",
+    "Welcome Party","a","b","c","d","e","f","g","h","i","j"
+,"k","l","m","o"]
 
 todo = Listbox(ListFrame)
 for do in data:
-    todo.insert(END,do)
+    x = "> " + do
+    todo.insert(END,x)
 todo.configure(
-    width = 50
+    width = 32,
+    height = 100,
+    font = tkfont.Font(
+        family = "courier",
+        size = 12,
+        weight = "bold"
+    )
 )
 scroll = Scrollbar(ListFrame)
 
-todo.configure(yscrollcommand=scroll.set)
+todo.configure(yscrollcommand=scroll.set,
+    bg= "#c8d4e8",
+    highlightthickness=0,
+    selectbackground= "#ffffff",
+    selectforeground= "#1b2330",
+    activestyle= "none"
+)
 todo.pack(side=LEFT, fill=BOTH)
 scroll.configure(command = todo.yview)
 scroll.pack(side=RIGHT,fill = BOTH)
+
+ListFrame.configure(
+    pady = 20,
+    padx = 20,
+    bg = "#1b2330"
+)
 ListFrame.pack()
 
 root.mainloop()
